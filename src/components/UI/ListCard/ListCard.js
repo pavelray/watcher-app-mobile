@@ -11,7 +11,6 @@ import { Spacer } from "../Spacer/Spacer";
 
 const ListCard = ({ item }) => {
   const { title, posterPath, overview, releaseDate, voteAverage } = item;
-  console.log(item);
   return (
     <ListCardContainer>
       <Image

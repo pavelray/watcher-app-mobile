@@ -19,6 +19,5 @@ export const ListCardContentWrapper = styled.View`
 export const DescriptionWrapper = styled.View`
   white-space: nowrap;
   overflow: hidden;
-  display: inline-block;
   text-overflow: ellipsis;
 `;

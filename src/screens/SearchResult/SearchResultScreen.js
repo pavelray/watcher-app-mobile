@@ -16,8 +16,14 @@ const Item = ({ title }) => (
 
 function SearchResultScreen({ route, navigation }) {
   const { mediaType, genreId } = route.params;
-  const { getMediaByGenre, result, isLoading, error } =
-    useContext(SearchContext);
+  const {
+    getMediaByGenre,
+    searchresult,
+    isLoading,
+    error,
+    loadMore,
+    isLoadingNextPage,
+  } = useContext(SearchContext);
 
   const selectedGenre =
     mediaType === MEDIA_TYPE.MOVIE
@@ -39,11 +45,24 @@ function SearchResultScreen({ route, navigation }) {
       )}
       {!isLoading && (
         <FlatList
-          data={result.results}
-          renderItem={({ item, index }) => <ListCard item={item} key={index}/>}
+          data={searchresult}
+          renderItem={({ item, index }) => (
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Details", { media: item })}
+            >
+              <ListCard item={item} key={index} />
+            </TouchableOpacity>
+          )}
           keyExtractor={(item) => item.id}
           // eslint-disable-next-line react-native/no-inline-styles
           contentContainerStyle={{ padding: 16, marginTop: 16 }}
+          onEndReached={() => loadMore(mediaType, genreId)}
+          onEndReachedThreshold={0.3}
+          ListFooterComponent={
+            isLoadingNextPage ? (
+              <ActivityIndicator animating={true} color={MD2Colors.red800} />
+            ) : null
+          }
         />
       )}
     </SafeArea>

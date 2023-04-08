@@ -4,20 +4,51 @@ import { getMediaByGenreRequest, transformResponse } from "./SearchService";
 export const SearchContext = createContext();
 
 export const SearchContextProvider = ({ children }) => {
-  const [result, setResult] = useState([]);
+  const [searchresult, setSearchResult] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingNextPage, setIsLoadingNextPage] = useState(false);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState();
 
   const getMediaByGenre = async (mediaType, genreId) => {
     setIsLoading(true);
     try {
-      const response = await getMediaByGenreRequest(mediaType, genreId, 1);
-      const finalResponse = await transformResponse(response);
+      const response = await getMediaByGenreRequest(
+        mediaType,
+        genreId,
+        currentPage
+      );
+      const finalResponse = await transformResponse(response, mediaType);
+      const { page, results, totalPages } = finalResponse;
+      setCurrentPage(page);
       setIsLoading(false);
-      setResult(finalResponse);
+      setTotalPage(totalPages);
+      setSearchResult(results);
     } catch (ex) {
       setIsLoading(false);
       setError(ex);
+    }
+  };
+
+  const loadMore = async (mediaType, genreId) => {
+    if (currentPage + 1 <= totalPage) {
+      setIsLoadingNextPage(true);
+      try {
+        const response = await getMediaByGenreRequest(
+          mediaType,
+          genreId,
+          currentPage + 1
+        );
+        const finalResponse = await transformResponse(response);
+        const { page, results } = finalResponse;
+        setCurrentPage(page);
+        setIsLoadingNextPage(false);
+        setSearchResult([...searchresult, ...results]);
+      } catch (ex) {
+        setIsLoadingNextPage(false);
+        setError(ex);
+      }
     }
   };
 
@@ -25,9 +56,11 @@ export const SearchContextProvider = ({ children }) => {
     <SearchContext.Provider
       value={{
         isLoading,
-        error,
+        isLoadingNextPage,
         getMediaByGenre,
-        result,
+        loadMore,
+        error,
+        searchresult,
       }}
     >
       {children}
