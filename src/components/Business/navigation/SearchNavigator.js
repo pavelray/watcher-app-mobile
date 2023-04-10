@@ -8,6 +8,7 @@ import SearchScreen from "../../../screens/Search/SearchScreen";
 import SearchResultScreen from "../../../screens/SearchResult/SearchResultScreen";
 import MediaDetailsScreen from "../../../screens/MediaDetails/MediaDetailsScreen";
 import PlayMediaScreen from "../../../screens/PlayMedia/PlayMediaScreen";
+import CastAndCrewScreen from "../../../screens/CastAndCrew/CastAndCrew";
 
 
 const SearchStack = createStackNavigator();
@@ -20,6 +21,7 @@ const SearchNavigator = () => {
       <SearchStack.Screen name="Search Result" component={SearchResultScreen} />
       <SearchStack.Screen name="Details" component={MediaDetailsScreen} />
       <SearchStack.Screen name="VideoPlayer" component={PlayMediaScreen} />
+      <SearchStack.Screen name="Cast" component={CastAndCrewScreen} />
     </SearchStack.Navigator>
   );
 };

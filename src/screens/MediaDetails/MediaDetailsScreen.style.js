@@ -16,7 +16,24 @@ export const GenreContainer = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   gap: ${(props) => props.theme.space[2]};
-  padding: ${(props) => props.theme.space[0]} ${(props) => props.theme.space[2]};
   text-align: center;
   align-content: center;
 `;
+
+export const MediaDetailsContainer = styled.View`
+  padding: ${(props) => props.theme.space[2]} ${(props) => props.theme.space[0]};
+`;
+
+export const ButtonContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+export const MovieStatsContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: ${(props) => props.theme.space[2]};
+`
+

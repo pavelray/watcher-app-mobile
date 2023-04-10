@@ -15,17 +15,19 @@ export const transformMediaDetailsResponse = async (
 ) => {
   const formattedResponse = await camelize(mediaResponse);
   const formattedResult =
-    mediaType === MEDIA_TYPE.TV
+    mediaType === MEDIA_TYPE.TV_SERIES
       ? {
           ...formattedResponse,
           title: formattedResponse.name,
           releaseDate: formattedResponse.firstAirDate,
           castPreview: formattedResponse.credits.cast.slice(0, 5),
+          runtime: `${formattedResponse.numberOfSeasons} Seasons`,
         }
       : {
           ...formattedResponse,
           castPreview: formattedResponse.credits.cast.slice(0, 5),
+          runtime: `${formattedResponse.runtime} m`,
         };
-
+  console.log(formattedResult);
   return formattedResult;
 };

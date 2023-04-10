@@ -1,10 +1,13 @@
 import camelize from "camelize";
 import { MEDIA_TYPE } from "../../utils/constants";
-import { getMovieByGenreUrl, getTvByGenreUrl } from "../../utils/apiUtills";
+import { getMovieByGenreUrl, getSearchUrl, getTvByGenreUrl } from "../../utils/apiUtills";
 import httpService from "../../utils/httpService";
 
-export const searchRequest = (searchTerm) => {
-  return null;
+export const searchRequest = async (searchTerm, currentPage) => {
+  const apiUrl = getSearchUrl(searchTerm, currentPage);
+  console.log(apiUrl);
+  const response = await httpService.get(apiUrl);
+  return response;
 };
 
 export const getMediaByGenreRequest = async (mediaType, genreId, page = 1) => {
@@ -21,10 +24,10 @@ export const transformResponse = async (mediaResponse, mediaType) => {
   const formattedResponse = await camelize(mediaResponse);
   const { results } = formattedResponse;
   const formattedResult = results.map((r) => {
-    if (mediaType === MEDIA_TYPE.TV) {
+    if (mediaType === MEDIA_TYPE.TV_SERIES) {
       return { ...r, title: r.name, releaseDate: r.firstAirDate };
     }
     return r;
   });
-  return { ...formattedResponse, result: formattedResult };
+  return { ...formattedResponse, results: formattedResult };
 };

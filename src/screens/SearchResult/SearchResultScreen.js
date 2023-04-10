@@ -8,14 +8,8 @@ import { SearchContext } from "../../services/Search/SearchContext";
 import { ActivityIndicator, MD2Colors } from "react-native-paper";
 import ListCard from "../../components/UI/ListCard/ListCard";
 
-const Item = ({ title }) => (
-  <View>
-    <Text>{title}</Text>
-  </View>
-);
-
 function SearchResultScreen({ route, navigation }) {
-  const { mediaType, genreId } = route.params;
+  const { mediaType, genreId, query } = route.params;
   const {
     getMediaByGenre,
     searchresult,
@@ -26,12 +20,12 @@ function SearchResultScreen({ route, navigation }) {
   } = useContext(SearchContext);
 
   const selectedGenre =
-    mediaType === MEDIA_TYPE.MOVIE
+    (mediaType === MEDIA_TYPE.MOVIE
       ? MOVIE_GENRE.find((x) => x.id === genreId)
-      : TV_GENRE.find((x) => x.id === genreId);
+      : TV_GENRE.find((x) => x.id === genreId)) || {};
 
   useEffect(() => {
-    getMediaByGenre(mediaType, selectedGenre.id);
+    getMediaByGenre(query, mediaType, selectedGenre.id);
   }, [mediaType, selectedGenre.id]);
 
   return (
@@ -48,7 +42,9 @@ function SearchResultScreen({ route, navigation }) {
           data={searchresult}
           renderItem={({ item, index }) => (
             <TouchableOpacity
-              onPress={() => navigation.navigate("Details", { id: item.id, type: mediaType })}
+              onPress={() =>
+                navigation.navigate("Details", { id: item.id, type: mediaType || item.mediaType })
+              }
             >
               <ListCard item={item} key={index} />
             </TouchableOpacity>

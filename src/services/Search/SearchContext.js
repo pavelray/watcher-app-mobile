@@ -1,6 +1,10 @@
 import React, { useState, createContext } from "react";
 
-import { getMediaByGenreRequest, transformResponse } from "./SearchService";
+import {
+  getMediaByGenreRequest,
+  searchRequest,
+  transformResponse,
+} from "./SearchService";
 export const SearchContext = createContext();
 
 export const SearchContextProvider = ({ children }) => {
@@ -11,14 +15,20 @@ export const SearchContextProvider = ({ children }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState();
 
-  const getMediaByGenre = async (mediaType, genreId) => {
+  const getMediaByGenre = async (query, mediaType = "", genreId = "") => {
     setIsLoading(true);
     try {
-      const response = await getMediaByGenreRequest(
-        mediaType,
-        genreId,
-        currentPage
-      );
+      let response;
+      if (query) {
+        console.log(query);
+        response = await searchRequest(query, currentPage);
+      } else {
+        response = await getMediaByGenreRequest(
+          mediaType,
+          genreId,
+          currentPage
+        );
+      }
       const finalResponse = await transformResponse(response, mediaType);
       const { page, results, totalPages } = finalResponse;
       setCurrentPage(page);

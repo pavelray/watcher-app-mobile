@@ -55,7 +55,7 @@ export const getAllCountriesAPIUrl = () => {
 };
 
 export const getSearchUrl = (query, page = 1) => {
-  return `${API_BASE_URL}/search/multi?api_key=${process.env.TMD_API_KEY}&language=en-US&query=${query}&page=${page}&include_adult=true&&sort_by=vote_count.desc`;
+  return `${API_BASE_URL}/search/multi?api_key=${TMD_API_KEY}&language=en-US&query=${query}&page=${page}&include_adult=true&&sort_by=vote_count.desc`;
 };
 
 export const getSeasonDetailsAPIUrl = (id, seasonNo) => {

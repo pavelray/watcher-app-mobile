@@ -18,7 +18,7 @@ function SearchScreen({ navigation }) {
 
   return (
     <SafeArea>
-      <SearchComponent />
+      <SearchComponent navigation={navigation} />
       <Spacer position="top" size="large" />
       <Spacer position="bottom" size="large">
         <Spacer position="left" size="medium">
