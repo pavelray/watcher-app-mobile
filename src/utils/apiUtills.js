@@ -27,7 +27,7 @@ export const getSimilarDataAPIUrl = (type, id) => {
 };
 
 export const getMediaDetailsDataAPIUrl = (type, id) => {
-  return `${API_BASE_URL}/${type}/${id}?api_key=${process.env.TMD_API_KEY}&language=en-US`;
+  return `${API_BASE_URL}/${type}/${id}?api_key=${TMD_API_KEY}&language=en-US`;
 };
 
 export const getAllCredits = (id) => {
@@ -43,7 +43,7 @@ export const getTvCredit = (id) => {
 };
 
 export const getMovieCastDetailsDataAPIUrl = (type, id) => {
-  return `${API_BASE_URL}/${type}/${id}/credits?api_key=${process.env.TMD_API_KEY}`;
+  return `${API_BASE_URL}/${type}/${id}/credits?api_key=${TMD_API_KEY}`;
 };
 
 export const getProvidersAPIUrl = (type, id) => {

@@ -9,6 +9,7 @@ import {
 } from "@expo-google-fonts/oswald";
 import Navigation from "./src/components/Business/navigation";
 import { SearchContextProvider } from "./src/services/Search/SearchContext";
+import { MediaDetailsContextProvider } from "./src/services/Media/MediaDetailsContext";
 
 function App() {
   const [oswaldLoaded] = useOswald({
@@ -26,7 +27,9 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <SearchContextProvider>
-          <Navigation />
+          <MediaDetailsContextProvider>
+            <Navigation />
+          </MediaDetailsContextProvider>
         </SearchContextProvider>
       </ThemeProvider>
       <ExpoStatusBar style="auto" />

@@ -32,7 +32,7 @@ function SearchResultScreen({ route, navigation }) {
 
   useEffect(() => {
     getMediaByGenre(mediaType, selectedGenre.id);
-  }, []);
+  }, [mediaType, selectedGenre.id]);
 
   return (
     <SafeArea>
@@ -48,7 +48,7 @@ function SearchResultScreen({ route, navigation }) {
           data={searchresult}
           renderItem={({ item, index }) => (
             <TouchableOpacity
-              onPress={() => navigation.navigate("Details", { media: item })}
+              onPress={() => navigation.navigate("Details", { id: item.id, type: mediaType })}
             >
               <ListCard item={item} key={index} />
             </TouchableOpacity>
