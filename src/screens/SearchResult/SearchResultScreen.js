@@ -1,12 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import { Text } from "../../components/UI/Typography/Text";
-import SafeArea from "../../components/UI/SafeArea/SafeArea";
 import { MEDIA_TYPE, MOVIE_GENRE, TV_GENRE } from "../../utils/constants";
 import { Spacer } from "../../components/UI/Spacer/Spacer";
-import { FlatList, TouchableOpacity, View } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native";
 import { SearchContext } from "../../services/Search/SearchContext";
 import { ActivityIndicator, MD2Colors } from "react-native-paper";
 import ListCard from "../../components/UI/ListCard/ListCard";
+import Loader from "../../components/UI/Loader/Loader";
+import { Wrapper } from "../../components/UI/Wrapper/Wrapper";
 
 function SearchResultScreen({ route, navigation }) {
   const { mediaType, genreId, query } = route.params;
@@ -29,21 +30,22 @@ function SearchResultScreen({ route, navigation }) {
   }, [mediaType, selectedGenre.id]);
 
   return (
-    <SafeArea>
+    <Wrapper>
       <Spacer position="top" size="large" />
       <Spacer position="left" size="large">
         <Text variant="title">{selectedGenre.name}</Text>
       </Spacer>
-      {isLoading && (
-        <ActivityIndicator animating={true} color={MD2Colors.red800} />
-      )}
+      {isLoading && <Loader />}
       {!isLoading && (
         <FlatList
           data={searchresult}
           renderItem={({ item, index }) => (
             <TouchableOpacity
               onPress={() =>
-                navigation.navigate("Details", { id: item.id, type: mediaType || item.mediaType })
+                navigation.navigate("Details", {
+                  id: item.id,
+                  type: mediaType || item.mediaType,
+                })
               }
             >
               <ListCard item={item} key={index} />
@@ -61,7 +63,7 @@ function SearchResultScreen({ route, navigation }) {
           }
         />
       )}
-    </SafeArea>
+    </Wrapper>
   );
 }
 

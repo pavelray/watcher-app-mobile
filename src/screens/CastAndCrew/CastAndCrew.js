@@ -1,17 +1,17 @@
 import React from "react";
-import SafeArea from "../../components/UI/SafeArea/SafeArea";
 import { FlatList, Image } from "react-native";
 import { Text } from "../../components/UI/Typography/Text";
 import { CrewCardView, PageContainer } from "./CastAndCrew.style";
 import { API_IMAGE_URL } from "../../utils/constants";
 import { Spacer } from "../../components/UI/Spacer/Spacer";
+import Wrapper from "../../components/UI/Wrapper/Wrapper";
 
 function CastAndCrewScreen({ route, navigation }) {
   const { allCredits } = route.params;
   const { cast = [] } = allCredits;
 
   return (
-    <SafeArea>
+    <Wrapper>
       <PageContainer>
         <Spacer position="bottom" size="large" />
         <Text variant="title">All Cast And Crews</Text>
@@ -23,10 +23,9 @@ function CastAndCrewScreen({ route, navigation }) {
               <Image
                 source={{ uri: `${API_IMAGE_URL}/w200${item.profilePath}` }}
                 style={{
-                  width: "auto",
+                  width: 120,
                   height: 200,
                   resizeMode: "contain",
-                  flex: 1,
                 }}
               />
               <Text variant="caption">{item.name}</Text>
@@ -38,7 +37,7 @@ function CastAndCrewScreen({ route, navigation }) {
           keyExtractor={(item, index) => index}
         />
       </PageContainer>
-    </SafeArea>
+    </Wrapper>
   );
 }
 

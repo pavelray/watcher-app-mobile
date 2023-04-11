@@ -1,13 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import SafeArea from "../../components/UI/SafeArea/SafeArea";
 import { Text } from "../../components/UI/Typography/Text";
-import {
-  ActivityIndicator,
-  Button,
-  Card,
-  Chip,
-  MD2Colors,
-} from "react-native-paper";
+import { Button, Card, Chip } from "react-native-paper";
 import { API_IMAGE_URL, MEDIA_TYPE } from "../../utils/constants";
 import { Spacer } from "../../components/UI/Spacer/Spacer";
 import {
@@ -21,6 +14,8 @@ import {
 import { ImageBackground, ScrollView } from "react-native";
 import { MediaDetailsContext } from "../../services/Media/MediaDetailsContext";
 import CastPreview from "../../components/Business/CastPreview/CastPreview";
+import Loader from "../../components/UI/Loader/Loader";
+import { Wrapper } from "../../components/UI/Wrapper/Wrapper";
 
 const MediaDetailsScreen = ({ route, navigation }) => {
   const { id, type } = route.params;
@@ -40,11 +35,9 @@ const MediaDetailsScreen = ({ route, navigation }) => {
   }, [id]);
 
   return (
-    <SafeArea>
+    <Wrapper>
       <ScrollView>
-        {isLoading && (
-          <ActivityIndicator animating={true} color={MD2Colors.red800} />
-        )}
+        {isLoading && <Loader />}
         {!isLoading && (
           <>
             <MediaCard mode="contained">
@@ -61,7 +54,10 @@ const MediaDetailsScreen = ({ route, navigation }) => {
                 <Text variant="title">{mediaDetails.title}</Text>
                 <Spacer position="bottom" size="medium" />
                 <MovieStatsContainer>
-                  <Text variant="caption">{mediaDetails.voteAverage && mediaDetails.voteAverage.toFixed(2)}</Text>
+                  <Text variant="caption">
+                    {mediaDetails.voteAverage &&
+                      mediaDetails.voteAverage.toFixed(2)}
+                  </Text>
                   <Text variant="caption">{mediaDetails.status}</Text>
                   <Text variant="caption">
                     {new Date(mediaDetails.releaseDate).getFullYear()}
@@ -124,7 +120,7 @@ const MediaDetailsScreen = ({ route, navigation }) => {
         )}
         <Spacer position="bottom" size="medium" />
       </ScrollView>
-    </SafeArea>
+    </Wrapper>
   );
 };
 

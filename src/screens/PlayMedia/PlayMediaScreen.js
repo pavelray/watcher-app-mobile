@@ -1,14 +1,14 @@
 import React from "react";
-import SafeArea from "../../components/UI/SafeArea/SafeArea";
 import MediaPlayer from "../../components/UI/MediaPlayer/MediaPlayer";
 import { Text } from "../../components/UI/Typography/Text";
 import { Spacer } from "../../components/UI/Spacer/Spacer";
 import { MediaPlayerContainer, MediaPlayerWrapper } from "./PlayMediaScreen.style";
+import { View } from "react-native";
 
 const PlayMediaScreen = ({ route }) => {
   const { videoUrl, title } = route.params;
   return (
-    <SafeArea>
+    <View>
     <MediaPlayerWrapper>
       <Text>{title}</Text>
       <Spacer position="bottom" size="large" />
@@ -16,7 +16,7 @@ const PlayMediaScreen = ({ route }) => {
         <MediaPlayer videoUrl={videoUrl} />
       </MediaPlayerContainer>
       </MediaPlayerWrapper>
-    </SafeArea>
+    </View>
   );
 };
 

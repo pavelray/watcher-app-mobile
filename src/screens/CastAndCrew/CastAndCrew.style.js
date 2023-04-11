@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 export const PageContainer = styled.View`
   flex:1;
   margin: ${(props) => props.theme.space[2]};
-  justify-contet: center;
+  justify-content: center;
 `;
 
 export const CrewCardView = styled.View`
@@ -11,5 +11,6 @@ export const CrewCardView = styled.View`
   flex-direction: column;
   flex:1;
   margin: ${(props) => props.theme.space[2]};
-  justify-contet: center;
+  justify-content: flex-start;
+  align-items: flex-start;
 `;

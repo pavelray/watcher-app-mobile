@@ -11,6 +11,7 @@ function MediaPlayer({ videoUrl }) {
       }}
       javaScriptCanOpenWindowsAutomatically={true}
       allowsInlineMediaPlayback={true}
+      setSupportMultipleWindows={false}
       onShouldStartLoadWithRequest={(request) => {
         return request.mainDocumentURL === videoUrl;
       }}

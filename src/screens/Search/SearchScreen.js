@@ -1,5 +1,4 @@
 import React from "react";
-import SafeArea from "../../components/UI/SafeArea/SafeArea";
 import SearchComponent from "../../components/Business/SearchComponent/SearchComponent";
 import { GenreContainer } from "./SearchScreen.style";
 import { Text } from "../../components/UI/Typography/Text";
@@ -7,6 +6,7 @@ import { MEDIA_TYPE, MOVIE_GENRE, TV_GENRE } from "../../utils/constants";
 import { ScrollView } from "react-native";
 import { Spacer } from "../../components/UI/Spacer/Spacer";
 import { Chip } from "react-native-paper";
+import { Wrapper } from "../../components/UI/Wrapper/Wrapper";
 
 function SearchScreen({ navigation }) {
   const navigateToPage = (genreId, mediaType) => {
@@ -17,7 +17,7 @@ function SearchScreen({ navigation }) {
   };
 
   return (
-    <SafeArea>
+    <Wrapper>
       <SearchComponent navigation={navigation} />
       <Spacer position="top" size="large" />
       <Spacer position="bottom" size="large">
@@ -53,7 +53,7 @@ function SearchScreen({ navigation }) {
           ))}
         </GenreContainer>
       </ScrollView>
-    </SafeArea>
+    </Wrapper>
   );
 }
 
