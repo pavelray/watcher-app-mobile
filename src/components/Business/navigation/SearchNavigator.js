@@ -22,7 +22,7 @@ const SearchNavigator = () => {
       <SearchStack.Screen name="Search Result" component={SearchResultScreen} />
       <SearchStack.Screen name="Details" component={MediaDetailsScreen} />
       <SearchStack.Screen name="VideoPlayer" component={PlayMediaScreen} />
-      <SearchStack.Screen name="Cast" component={CastAndCrewScreen} />
+      <SearchStack.Screen name="Cast And Crew" component={CastAndCrewScreen} />
       <SearchStack.Screen name="Bio" component={Profile} />
     </SearchStack.Navigator>
   );

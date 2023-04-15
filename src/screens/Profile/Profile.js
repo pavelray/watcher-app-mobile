@@ -3,6 +3,8 @@ import Wrapper from "../../components/UI/Wrapper/Wrapper";
 import { MediaDetailsContext } from "../../services/Media/MediaDetailsContext";
 import Loader from "../../components/UI/Loader/Loader";
 import ProfileListCard from "../../components/UI/ListCard/ProfileListCard";
+import { ProfileListContainer } from "./Profile.style";
+import { ScrollView } from "react-native";
 
 const Profile = ({ route, navigation }) => {
   const { id, type } = route.params;
@@ -14,7 +16,7 @@ const Profile = ({ route, navigation }) => {
     });
   };
 
-  const { getMediaDetails, mediaDetails, isLoading } =
+  const { getMediaDetails, bioDetails, isLoading } =
     useContext(MediaDetailsContext);
 
   useEffect(() => {
@@ -24,7 +26,11 @@ const Profile = ({ route, navigation }) => {
     <Wrapper>
       {isLoading && <Loader />}
       {!isLoading && (
-        <ProfileListCard bio={mediaDetails} navigateToPage={navigateToPage} />
+        <ProfileListContainer>
+          <ScrollView>
+            <ProfileListCard bio={bioDetails} navigateToPage={navigateToPage} />
+          </ScrollView>
+        </ProfileListContainer>
       )}
     </Wrapper>
   );

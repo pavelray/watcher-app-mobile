@@ -5,7 +5,6 @@ import httpService from "../../utils/httpService";
 
 export const searchRequest = async (searchTerm, currentPage) => {
   const apiUrl = getSearchUrl(searchTerm, currentPage);
-  console.log(apiUrl);
   const response = await httpService.get(apiUrl);
   return response;
 };

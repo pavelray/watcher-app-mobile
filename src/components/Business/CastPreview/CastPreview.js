@@ -3,13 +3,15 @@ import { CastPreviewContainer, ViewAllContainer } from "./CastPreview.style";
 import { Avatar, Button } from "react-native-paper";
 import {
   API_IMAGE_URL,
+  MEDIA_TYPE,
   NO_IMG_PLACEHOLDER_USER,
 } from "../../../utils/constants";
 import { Text } from "../../UI/Typography/Text";
+import { TouchableOpacity } from "react-native";
 
 function CastPreview({ cast, navigation, allCredits }) {
   const navigateToPage = () => {
-    navigation.navigate("Cast", {
+    navigation.navigate("Cast And Crew", {
       allCredits: allCredits,
     });
   };
@@ -24,7 +26,17 @@ function CastPreview({ cast, navigation, allCredits }) {
                 ? `${API_IMAGE_URL}/w154/${c.profilePath}`
                 : NO_IMG_PLACEHOLDER_USER;
             return (
-              <Avatar.Image key={c.id} size={50} source={{ uri: avatarImg }} />
+              <TouchableOpacity
+                key={c.id}
+                onPress={() =>
+                  navigation.navigate("Bio", {
+                    id: c.id,
+                    type: MEDIA_TYPE.PERSON
+                  })
+                }
+              >
+                <Avatar.Image size={50} source={{ uri: avatarImg }} />
+              </TouchableOpacity>
             );
           })}
           <ViewAllContainer>

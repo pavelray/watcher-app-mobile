@@ -32,7 +32,7 @@ const MediaDetailsScreen = ({ route, navigation }) => {
 
   useEffect(() => {
     getMediaDetails(type, id);
-  }, [id]);
+  }, []);
 
   return (
     <Wrapper>

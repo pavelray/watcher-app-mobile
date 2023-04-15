@@ -14,7 +14,7 @@ function CastAndCrewScreen({ route, navigation }) {
     <Wrapper>
       <PageContainer>
         <Spacer position="bottom" size="large" />
-        <Text variant="title">All Cast And Crews</Text>
+        <Text variant="title">Cast</Text>
         <Spacer position="bottom" size="large" />
         <FlatList
           data={cast}
@@ -43,7 +43,7 @@ function CastAndCrewScreen({ route, navigation }) {
           )}
           //Setting the number of column
           numColumns={3}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item) => item.id}
         />
       </PageContainer>
     </Wrapper>

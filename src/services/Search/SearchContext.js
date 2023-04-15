@@ -20,7 +20,6 @@ export const SearchContextProvider = ({ children }) => {
     try {
       let response;
       if (query) {
-        console.log(query);
         response = await searchRequest(query, currentPage);
       } else {
         response = await getMediaByGenreRequest(
