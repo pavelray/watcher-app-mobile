@@ -1,11 +1,13 @@
 import camelize from "camelize";
 import { getMediaDetailsDataAPIUrl } from "../../utils/apiUtills";
 import httpService from "../../utils/httpService";
-import { MEDIA_TYPE, appendToReq } from "../../utils/constants";
+import { APPEND_TO_REQ, MEDIA_TYPE } from "../../utils/constants";
 import { getAge } from "../../utils/helperMethods";
 
 export const getMediaDetailsRequest = async (mediaType, id) => {
-  const apiUrl = `${getMediaDetailsDataAPIUrl(mediaType, id)}${appendToReq}`;
+  const apiUrl = `${getMediaDetailsDataAPIUrl(mediaType, id)}${
+    APPEND_TO_REQ[mediaType]
+  }`;
   const response = await httpService.get(apiUrl);
   return response;
 };

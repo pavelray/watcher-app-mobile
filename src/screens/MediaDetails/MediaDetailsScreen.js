@@ -19,7 +19,6 @@ import { Wrapper } from "../../components/UI/Wrapper/Wrapper";
 
 const MediaDetailsScreen = ({ route, navigation }) => {
   const { id, type } = route.params;
-
   const navigateToPage = (genreId, mediaType) => {
     navigation.navigate("Search Result", {
       genreId: genreId,
@@ -31,8 +30,9 @@ const MediaDetailsScreen = ({ route, navigation }) => {
     useContext(MediaDetailsContext);
 
   useEffect(() => {
+    console.log(id, type);
     getMediaDetails(type, id);
-  }, []);
+  }, [id, type]);
 
   return (
     <Wrapper>

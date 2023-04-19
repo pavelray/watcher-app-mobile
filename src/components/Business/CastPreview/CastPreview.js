@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { CastPreviewContainer, ViewAllContainer } from "./CastPreview.style";
 import { Avatar, Button } from "react-native-paper";
 import {

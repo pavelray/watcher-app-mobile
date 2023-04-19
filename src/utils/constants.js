@@ -272,6 +272,11 @@ export const appendToReq =
 export const appendToReqPerson =
   "&append_to_response=images,combined_credits,external_ids&include_image_language=en";
 
+export const APPEND_TO_REQ = {
+  [MEDIA_TYPE.MOVIE]: appendToReq,
+  [MEDIA_TYPE.TV_SERIES]: appendToReq,
+  [MEDIA_TYPE.PERSON]: appendToReqPerson,
+};
 // Youtube - https://www.googleapis.com/youtube/v3/videos?key=YOUR_API_KEY&part=snippet&id=VIDEO_ID - to get image thumbnail
 //
 
